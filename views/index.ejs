@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PolyLib</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        .navbar {
+            width: 100%;
+        }
+        .row{
+            width: 100%;
+            margin-top: 20px;
+            margin-left: 2px;
+        }
+        .ListAuthor{
+            grid-area: ListAuthor;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 2fr ;
+            border-radius: 10px;
+        }
+        .itemAuthor{
+            width: 200px;
+            height: 270px;
+            background-color: #e0dfdf;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+        .itemTextFullName{
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .imgAuthor{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 100%; height: 60%;
+            object-fit: cover;margin-bottom: 5px
+        }
+        .itemText{
+            margin-left: 5px;
+        }
+        .ListBook{
+            grid-area: ListBook;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr 2fr;
+            border-radius: 10px;
+        }
+        .itemBook{
+            width: 200px;
+            height: 320px;
+            background-color: #e0dfdf;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        .itemTextName{
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .imgBook{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 100%; height: 60%;
+            
+        }
+        .itemText{
+            margin-left: 5px;
+        }
+        #buttonDelUp{
+            margin-left: 5px;
+            margin-top: 5px;
+            width: 45%;
+            height: 40px;
+        }
+        #btn-details:hover{
+            background-color: orangered;
+            color: white;
+        }
+        .alert-dialog {
+            /* Thêm các thuộc tính CSS cho dialog */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 50%;
+            max-height: 80%;
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+        }
+        .head-wrapper{
+            width: 100%;
+            height: 40px;
+            padding-top: 5px;
+            border-bottom: 1px solid gray;
+        }
+        .text-title-head{
+            font-size: 22px;
+            text-align: center;
+            margin-left: 280px;
+            color: orangered;
+            font-family: "Barlow Condensed";
+
+        }
+
+        .alert-dialog-content {
+            margin-bottom: 10px;
+        }
+        .alert-dialog-fullName {
+            font-weight: bold;
+        }
+        .alert-dialog-birthday {
+            font-style: italic;
+        }
+        .alert-dialog-biography {
+            font-style: italic;
+            margin-top: 10px;
+            margin-left: 20px;
+
+        }
+
+        .alert-dialog-nationality {
+            font-style: italic;
+
+        }
+
+        .alert-dialog-image{
+            width: 180px;
+            height: 200px;
+            margin-top: 20px;
+
+        }
+        .close-button{
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+            border: none;
+            float: left;
+            background-color: orange;
+            margin-bottom: 20px;
+
+        }
+        .close-button:hover{
+            background-color: orangered;
+        }
+        .content{
+            width: 55%;
+            float: right;
+            margin-top: 20px;
+            margin-right: 110px;
+        }
+        .buttons{
+            float: right;
+        }
+        .button{
+            width: 80px;
+            background-color: orange;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            padding-bottom: 5px;
+        }
+        .button:hover{
+            background-color: orangered;
+        }
+
+
+
+
+        .alert-dialog-comic {
+            /* Thêm các thuộc tính CSS cho dialog */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 50%;
+            max-height: 80%;
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+        }
+
+        .alert-dialog-content-comic {
+            margin-bottom: 10px;
+        }
+        .alert-dialog-name-comic {
+            font-weight: bold;
+        }
+        .alert-dialog-price-comic {
+            font-style: italic;
+        }
+        .alert-dialog-author-comic {
+            font-style: italic;
+
+        }
+
+        .alert-dialog-category-comic {
+            font-style: italic;
+        }
+
+        .alert-dialog-publicationYear-comic {
+            font-style: italic;
+
+
+        }
+
+        .alert-dialog-detailBook-comic {
+            margin-bottom: 10px;
+            margin-left: 20px;
+            margin-top: 10px;
+            font-style: italic;
+
+        }
+
+        .alert-dialog-image-comic{
+            width: 20%;
+            height: 200px;
+            margin-top: 20px;
+            margin-left: -10px;
+        }
+        .close-button-comic{
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+            border: none;
+            float: left;
+            background-color: orange;
+            margin-bottom: 20px;
+
+        }
+        .close-button-comic:hover{
+            background-color: orangered;
+        }
+        .content-comic{
+            width: 60%;
+            float: right;
+            margin-top: 20px;
+            margin-right: 110px;
+            margin-left: 10px;
+
+        }
+        
+        .head-wrapper-comic{
+            width: 100%;
+            height: 40px;
+            padding-top: 5px;
+            border-bottom: 1px solid gray;
+        }
+        .text-title-head-comic{
+            font-size: 22px;
+            text-align: center;
+            margin-left: 280px;
+            color: orangered;
+            font-family: "Barlow Condensed";
+
+        }
+        .contentImageDiv-comic{
+            width: 100%;
+            padding-left: 30px;
+            margin-bottom: 5px;
+            
+        }
+        .alert-dialog-textContentImage-comic{
+            font-weight: bold;
+            margin-left: -10px;
+            margin-top: 10px;
+        }
+
+        .duongKeNgang{
+            border-bottom: 1px solid gray;
+            margin-top: 50px;
+        }
+        .likeAndCommentDiv{
+            width: 100%;
+            height:30px;
+            border-bottom: 1px solid gray;
+        }
+        .like-button{
+            border: none;
+            background-color: white;
+            float: left;
+            margin-left: 5px;
+            color: gray;
+        }
+        .like-button:hover{
+            text-decoration: underline;
+        }
+
+        .alert-dialog-member{
+            /* Thêm các thuộc tính CSS cho dialog */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 25%;
+            height: 50%;
+            max-height: 80%;
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+        }
+        .text-title-head-member{
+            font-size: 22px;
+            text-align: center;
+            margin-left: 5px;
+            color: orangered;
+            font-family: "Barlow Condensed";
+
+        }
+        .close-button-member{
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+            border: none;
+            float: right;
+            margin-right: 5px;
+            background-color: orange;
+            margin-bottom: 20px;
+
+        }
+        .close-button-member:hover{
+            background-color: orangered;
+        }
+
+        .div-content-member{
+            width: 100%;
+            height: 89%;
+        }
+
+        .item-div-member{
+            width: 100%;
+            height: 15%;
+            padding-top: 5px;
+        }
+
+        .image-item-member{
+            width: 40px;
+            height: 40px;
+            border: 1px solid gray;
+            float: left;
+            border-radius: 25px;
+            margin-top: -4px;
+        }
+
+        .name-item-member{
+            font-size: 20px;
+            margin-left: 5px;
+            color: black;
+            font-family: "Barlow Condensed";
+        }
+
+        .button-message-member{
+            width: 100px;
+            height: 30px;
+            border: none;
+            background-color: orange;
+            float: right;
+            border-radius: 10px;
+            color: white;
+            margin-right: 5px;
+
+        }
+        .button-message-member:hover{
+            background-color: orangered;
+        }
+
+        .div-comment{
+        margin-top: 20px;
+        }    
+        .comment-container {
+        display: flex;
+        margin-bottom: 16px;
+        }
+        .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+        }
+
+        .comment-content {
+        flex: 1;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+        }
+
+        .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        }
+
+        .user-name {
+        font-weight: bold;
+        margin-right: 8px;
+        }
+
+        .comment-date {
+        color: #888;
+        }
+        .comment-total{
+            border: none;
+            background-color: white;
+            float: left;
+            margin-left: 5px;
+            color: gray;
+            float: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        
+    </style>
+</head>
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a style="font-size: 20px; font-weight: bold" class="navbar-brand" href="/index">ComicCorner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Người dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/author">Tác giả</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comic">Truyện tranh</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Tài khoản
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/">Đổi mật khẩu</a></li>
+                      <li><a class="dropdown-item" href="/index/logout">Đăng xuất</a></li>
+                    </ul>
+                  </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="row">
+        <h5 style="margin-top: 10px;margin-bottom: 30px">Tất cả truyện tranh</h5>
+        
+        <% const user = dataUser %>
+        <% const likeComic = dataLikeComic %>
+        <% const authorData = dataAuthor %>
+        <% const commentData = dataComment %>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Cover Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>PublicationYear</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var stt = 1%>
+            <% dataComic.forEach((comic) => { %>
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td><%= stt %></td>
+                    <td>
+                        <img style="width: 50px;height: 80px;" src="<%= comic.coverImage %>">
+                    </td>
+                    <td>
+                        <%= comic.name %>
+                    </td>
+                    <td>
+                        <% // Tìm bookCategory tương ứng với ID
+                        const author = dataAuthor.find(author => author._id.equals(comic.author));
+                    if (author) { %>
+                        TG: <%= author.fullName %>
+                    <% } %>
+                    </td>
+                    <td><%= comic.publicationYear %></td>
+                    <td> <%= comic.description %></td>
+                </tr>
+                <% stt++ %>
+            <% }) %>
+            </tbody>
+        </table>
+
+</div>
+
+</body>
+<script>
+    function openAlertDialogAuthor(author) {
+        const alertDialog = document.createElement('div');
+        alertDialog.classList.add('alert-dialog');
+
+        const headWrapper = document.createElement('div');
+        headWrapper.classList.add('head-wrapper');
+
+
+        const textTitleHead = document.createElement('span')
+        textTitleHead.classList.add('text-title-head');
+        textTitleHead.textContent = 'Thông Tin Tác giả';
+
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', closeAlertDialogAuthor);
+
+        // Tạo div lớn bao quanh các phần tử
+        const contentWrapper = document.createElement('div');
+        contentWrapper.classList.add('content-wrapper');
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+
+        const image = document.createElement('img');
+        image.classList.add('alert-dialog-image');
+        image.src = `${author.image}`;
+
+        const fullName = document.createElement('div');
+        fullName.classList.add('alert-dialog-fullName');
+        fullName.textContent = `Tác giả: ${author.fullName}`
+
+        if (author.birthday) {
+            // Chuyển đổi từ chuỗi ISO 8601 sang định dạng yyyy-MM-dd
+            var date = new Date(author.birthday);
+            var day = date.getDate().toString().padStart(2, '0'); // Ngày
+            var month = (date.getMonth() + 1).toString().padStart(2, '0'); // Tháng (đánh số từ 0 - 11)
+            var year = date.getFullYear(); // Năm
+            var formattedDate = `${day}-${month}-${year}`;
+        }
+
+        const birthday = document.createElement('div');
+        birthday.classList.add('alert-dialog-birthday');
+        birthday.textContent = `Ngày sinh: ${formattedDate}`
+
+        const nationality = document.createElement('div');
+        nationality.classList.add('alert-dialog-nationality');
+        nationality.textContent = `Quốc tịch : ${author.nationality}`
+
+        const introduce = document.createElement('div');
+        introduce.classList.add('alert-dialog-biography');
+        introduce.textContent = `Giới thiệu : ${author.biography}`
+
+       
+
+
+        content.appendChild(fullName);
+        content.appendChild(birthday);
+        content.appendChild(nationality);
+
+        // Thêm các phần tử vào div lớn
+        headWrapper.appendChild(closeButton)
+        headWrapper.appendChild(textTitleHead)
+        contentWrapper.appendChild(image);
+        contentWrapper.appendChild(content);
+
+        
+
+        alertDialog.appendChild(headWrapper);
+        alertDialog.appendChild(contentWrapper);
+        alertDialog.appendChild(introduce);
+
+
+        document.body.appendChild(alertDialog);
+    }
+
+    function closeAlertDialogAuthor() {
+        const alertDialog = document.querySelector('.alert-dialog');
+        if (alertDialog) {
+            document.body.removeChild(alertDialog);
+
+        }
+    }
+
+
+    function openAlertDialogComic(comic,authorData,dataUser,dataLikeComic,dataComment) {
+        const authorOfComic = authorData.find(author => author._id === comic.author);
+        const alertDialog = document.createElement('div');
+        alertDialog.classList.add('alert-dialog-comic');
+
+        const headWrapper = document.createElement('div');
+        headWrapper.classList.add('head-wrapper-comic');
+
+
+        const textTitleHead = document.createElement('span')
+        textTitleHead.classList.add('text-title-head-comic');
+        textTitleHead.textContent = 'Thông Tin Truyện Tranh';
+
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button-comic');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', closeAlertDialogComic);
+
+        // Tạo div lớn bao quanh các phần tử
+        const contentWrapper = document.createElement('div');
+        contentWrapper.classList.add('content-wrapper-comic');
+
+        const content = document.createElement('div');
+        content.classList.add('content-comic');
+
+        const contentImageDiv = document.createElement('div');
+        contentImageDiv.classList.add('contentImageDiv-comic');
+
+
+        const image = document.createElement('img');
+        image.classList.add('alert-dialog-image-comic');
+        image.src = `${comic.coverImage}`;
+
+        const name = document.createElement('div');
+        name.classList.add('alert-dialog-name-comic');
+        name.textContent = `Sách: ${comic.name}`;
+
+
+        const author = document.createElement('div');
+        author.classList.add('alert-dialog-author-comic');
+        author.textContent = `Tác giả: ${authorOfComic.fullName}`;
+
+
+        const publicationYear = document.createElement('div');
+        publicationYear.classList.add('alert-dialog-publicationYear-comic');
+        publicationYear.textContent = `Năm suất bản : ${comic.publicationYear}`;
+
+        const detailBook = document.createElement('div');
+        detailBook.classList.add('alert-dialog-detailBook-comic');
+        detailBook.textContent = `Thông tin cuốn sách : ${comic.description}`;
+
+
+        const duongKeNgang = document.createElement('div');
+        duongKeNgang.classList.add('duongKeNgang');
+
+        const likeAndCommentDiv = document.createElement('div');
+        likeAndCommentDiv.classList.add('likeAndCommentDiv');
+
+
+        const likeComic = dataLikeComic.filter(like => like.comic === comic._id);
+        //const dislikeBook = dataDislikeProduct.filter(dislike => dislike.book === idBook);
+
+        const likeButton = document.createElement('button');
+        likeButton.classList.add('like-button');
+        likeButton.textContent = likeComic.length + ' lượt yêu thích';
+        likeButton.addEventListener('click',() => openDialogMember(likeComic,dataUser,'1',comic.name));
+
+
+
+       const commentOfComic = dataComment.filter(com => com.comic === comic._id)
+
+        const commentTotal = document.createElement('button');
+        commentTotal.classList.add('comment-total');
+        commentTotal.textContent = commentOfComic.length + ' bình luận';
+
+        const textContentImage = document.createElement('div');
+        textContentImage.classList.add('alert-dialog-textContentImage-comic');
+        textContentImage.textContent = `Ảnh nội dung truyện`;
+        contentImageDiv.appendChild(textContentImage)
+        for(var i = 0 ; i < comic.contentImage.length ; i++){
+            const imageContent = document.createElement('img');
+            imageContent.classList.add('alert-dialog-image-comic');
+            imageContent.src = `${comic.contentImage[i]}`;
+            alertDialog.appendChild(imageContent);
+            contentImageDiv.appendChild(imageContent)
+        }
+
+        const divComment = document.createElement('div')
+        divComment.classList.add('div-comment');
+
+        commentOfComic.forEach((comment) => {
+        const user = dataUser.find(user => user._id === comment.user);
+
+        const commentContainer = document.createElement('div');
+        commentContainer.classList.add('comment-container');
+
+        const userAvatar = document.createElement('img');
+        userAvatar.src = user.image; // Sử dụng đường dẫn ảnh từ user
+        userAvatar.alt = 'User Avatar';
+        userAvatar.classList.add('user-avatar');
+
+        const commentContent = document.createElement('div');
+        commentContent.classList.add('comment-content');
+
+        const commentHeader = document.createElement('div');
+        commentHeader.classList.add('comment-header');
+
+        const userName = document.createElement('span');
+        userName.classList.add('user-name');
+        userName.textContent = user.fullName;
+
+        const commentDate = document.createElement('span');
+        commentDate.classList.add('comment-date');
+        commentDate.textContent = formatTimeAgo(comment.commentDate);
+
+        const commentText = document.createElement('p');
+        commentText.textContent = comment.content;
+
+        commentHeader.appendChild(userName);
+        commentHeader.appendChild(commentDate);
+
+        commentContent.appendChild(commentHeader);
+        commentContent.appendChild(commentText);
+
+        commentContainer.appendChild(userAvatar);
+        commentContainer.appendChild(commentContent);
+
+        divComment.appendChild(commentContainer);
+        });
+
+        content.appendChild(name);
+        content.appendChild(author);
+        content.appendChild(publicationYear);
+        
+
+        // Thêm các phần tử vào div lớn
+
+        headWrapper.appendChild(closeButton)
+        headWrapper.appendChild(textTitleHead)
+        contentWrapper.appendChild(image);
+        contentWrapper.appendChild(content);
+
+        likeAndCommentDiv.appendChild(likeButton)
+        
+        // Thêm div lớn vào dialog
+        alertDialog.appendChild(headWrapper);
+        alertDialog.appendChild(contentWrapper);
+        alertDialog.appendChild(detailBook);
+        alertDialog.appendChild(contentImageDiv);
+        
+        
+        alertDialog.appendChild(duongKeNgang);
+        alertDialog.appendChild(likeAndCommentDiv);
+        alertDialog.appendChild(divComment);
+
+
+
+        document.body.appendChild(alertDialog);
+    }
+
+    function formatDate(dateString) {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formattedDate = new Date(dateString).toLocaleDateString('en-GB', options);
+        return formattedDate;
+    }
+
+    function formatTimeAgo(commentDate) {
+    const currentDate = new Date();
+    const commentDateTime = new Date(commentDate);
+
+    const timeDifference = currentDate - commentDateTime;
+    const secondsDifference = Math.floor(timeDifference / 1000);
+    const minutesDifference = Math.floor(secondsDifference / 60);
+    const hoursDifference = Math.floor(minutesDifference / 60);
+    const daysDifference = Math.floor(hoursDifference / 24);
+
+    if (secondsDifference < 60) {
+        return `${secondsDifference} giây trước`;
+    } else if (minutesDifference < 60) {
+        return `${minutesDifference} phút trước`;
+    } else if (hoursDifference < 24) {
+        return `${hoursDifference} giờ trước`;
+    } else if (daysDifference === 1) {
+        return '1 ngày trước';
+    } else if (daysDifference <= 3) {
+        return `${daysDifference} ngày trước`;
+    } else {
+        // Sử dụng hàm formatDate để định dạng ngày khi đã qua 3 ngày
+        return formatDate(commentDate);
+    }
+}
+
+
+
+    function openDialogMember(like,members,status,nameBook){
+        const alertDialog = document.createElement('div');
+        alertDialog.classList.add('alert-dialog-member');
+
+        const headWrapper = document.createElement('div');
+        headWrapper.classList.add('head-wrapper');
+
+        var bookNameNew = '';
+        if (nameBook.length > 20) {
+            bookNameNew = nameBook.slice(0, 20) + '...';
+        }else{
+            bookNameNew = nameBook;
+        }
+        const textTitleHead = document.createElement('span')
+        textTitleHead.classList.add('text-title-head-member');
+        if (status === '1'){
+            textTitleHead.textContent = like.length + ' lượt thích ' + '"' + bookNameNew + '"';
+        }
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button-member');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', closeAlertDialogMember);
+
+        var content;
+        var itemMember;
+        var member;
+        var imageMember;
+        var nameMember;
+        var buttonMessage;
+
+        if (status === '1'){
+            content = document.createElement('div');
+            content.classList.add('div-content-member');
+            like.forEach((like)=>{
+
+                itemMember = document.createElement('div');
+                itemMember.classList.add('item-div-member');
+
+                member = members.find(mem => mem._id === like.user);
+
+                imageMember = document.createElement('img');
+                imageMember.classList.add('image-item-member');
+                imageMember.src = member.image;
+
+                nameMember = document.createElement('span');
+                nameMember.classList.add('name-item-member');
+                nameMember.textContent = member.fullName;
+
+                
+
+                itemMember.appendChild(imageMember);
+                itemMember.appendChild(nameMember);
+
+                content.appendChild(itemMember);
+            })
+
+        }
+        headWrapper.appendChild(textTitleHead)
+        headWrapper.appendChild(closeButton)
+
+        alertDialog.appendChild(headWrapper)
+        alertDialog.appendChild(content)
+
+
+        document.body.appendChild(alertDialog);
+    }
+    function closeAlertDialogMember() {
+        const alertDialog = document.querySelector('.alert-dialog-member');
+        if (alertDialog) {
+            document.body.removeChild(alertDialog);
+
+        }
+    }
+
+    function closeAlertDialogComic() {
+        const alertDialog = document.querySelector('.alert-dialog-comic');
+        if (alertDialog) {
+            document.body.removeChild(alertDialog);
+
+        }
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</html>

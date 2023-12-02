@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PolyLib</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        .navbar {
+            width: 100%;
+        }
+        .row{
+            width: 100%;
+            margin-top: 20px;
+            margin-left: 2px;
+        }
+        .input{
+            width: 390px;
+            height: 40px;
+            padding-left: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+        }
+        .inputDescription{
+            width: 390px;
+            height: 150px;
+            padding-left: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+        }
+        .select{
+            width: 390px;
+            height: 40px;
+            padding-left: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: white;
+        }
+        #choose{
+            width: 130px;
+            margin-top: 20px;
+            
+        }
+        #push{
+            width: 300px;
+            height: 40px;
+            margin-left: 45px;
+            border: none;
+            border-radius: 10px;
+            background-color: orange;
+            color: white;
+            
+        }
+        #push:hover{
+            background-color: orangered;
+        }
+        .custom-file-input::-webkit-file-upload-button {
+            background: orange;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            
+        }
+        .imgBook{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 15%; height: 15%;
+            object-fit: cover;margin-bottom: 5px
+        }
+        .hiddenImage {
+            display: none;
+        }
+        .hiddenImageAdd {
+            display: none;
+        }
+
+        .visibleImage {
+            display: block;
+        }
+        .visibleImageAdd {
+            display: block;
+        }
+        .ListBook{
+            grid-area: ListBook;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 2fr 2fr 2fr;
+            border-radius: 10px;
+        }
+        .itemBook{
+            width: 200px;
+            height: 320px;
+            background-color: #e0dfdf;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        .itemTextName{
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        .imgBook{
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            width: 100%; height: 60%;
+            
+        }
+        .itemText{
+            margin-left: 5px;
+        }
+        #buttonDelUp{
+            margin-left: 5px;
+            margin-top: 5px;
+            width: 45%;
+            height: 40px;
+        }
+        #btn-details:hover{
+            background-color: orangered;
+            color: white;
+        }
+        .alert-dialog {
+            /* Thêm các thuộc tính CSS cho dialog */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 50%;
+            max-height: 80%;
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+        }
+
+        .alert-dialog-content {
+            margin-bottom: 10px;
+        }
+        .alert-dialog-name {
+            font-weight: bold;
+        }
+        .alert-dialog-price {
+            font-style: italic;
+        }
+        .alert-dialog-author {
+            font-style: italic;
+
+        }
+
+        .alert-dialog-category {
+            font-style: italic;
+        }
+
+        .alert-dialog-publicationYear {
+            font-style: italic;
+
+
+        }
+
+        .alert-dialog-detailBook {
+            margin-bottom: 10px;
+            margin-left: 20px;
+            margin-top: 10px;
+            font-style: italic;
+
+        }
+
+        .alert-dialog-image{
+            width: 20%;
+            height: 200px;
+            margin-top: 20px;
+            margin-left: -10px;
+        }
+        .close-button{
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+            border: none;
+            float: left;
+            background-color: orange;
+            margin-bottom: 20px;
+
+        }
+        .close-button:hover{
+            background-color: orangered;
+        }
+        .content{
+            width: 60%;
+            float: right;
+            margin-top: 20px;
+            margin-right: 110px;
+            margin-left: 10px;
+
+        }
+        
+        .buttons{
+            float: right;
+        }
+        .button{
+            width: 80px;
+            background-color: orange;
+            margin: 5px;
+            border-radius: 5px;
+            border: none;
+            color: white;
+            padding-bottom: 5px;
+        }
+        .button:hover{
+            background-color: orangered;
+        }
+        .head-wrapper{
+            width: 100%;
+            height: 40px;
+            padding-top: 5px;
+            border-bottom: 1px solid gray;
+        }
+        .text-title-head{
+            font-size: 22px;
+            text-align: center;
+            margin-left: 280px;
+            color: orangered;
+            font-family: "Barlow Condensed";
+
+        }
+        .contentImageDiv{
+            width: 100%;
+            padding-left: 30px;
+            margin-bottom: 5px;
+            
+        }
+        .alert-dialog-textContentImage{
+            font-weight: bold;
+            margin-left: -10px;
+            margin-top: 10px;
+        }
+
+        .duongKeNgang{
+            border-bottom: 1px solid gray;
+            margin-top: 50px;
+        }
+        .likeAndCommentDiv{
+            width: 100%;
+            height:30px;
+            border-bottom: 1px solid gray;
+        }
+        .like-button{
+            border: none;
+            background-color: white;
+            float: left;
+            margin-left: 5px;
+            color: gray;
+        }
+        .like-button:hover{
+            text-decoration: underline;
+        }
+
+        .alert-dialog-member{
+            /* Thêm các thuộc tính CSS cho dialog */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            border: 1px solid #ccc;
+            width: 25%;
+            height: 50%;
+            max-height: 80%;
+            overflow-y: auto; /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            border-radius: 5px;
+        }
+        .text-title-head-member{
+            font-size: 22px;
+            text-align: center;
+            margin-left: 5px;
+            color: orangered;
+            font-family: "Barlow Condensed";
+
+        }
+        .close-button-member{
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 25px;
+            border: none;
+            float: right;
+            margin-right: 5px;
+            background-color: orange;
+            margin-bottom: 20px;
+
+        }
+        .close-button-member:hover{
+            background-color: orangered;
+        }
+
+        .div-content-member{
+            width: 100%;
+            height: 89%;
+        }
+
+        .item-div-member{
+            width: 100%;
+            height: 15%;
+            padding-top: 5px;
+        }
+
+        .image-item-member{
+            width: 40px;
+            height: 40px;
+            border: 1px solid gray;
+            float: left;
+            border-radius: 25px;
+            margin-top: -4px;
+        }
+
+        .name-item-member{
+            font-size: 20px;
+            margin-left: 5px;
+            color: black;
+            font-family: "Barlow Condensed";
+        }
+
+        .button-message-member{
+            width: 100px;
+            height: 30px;
+            border: none;
+            background-color: orange;
+            float: right;
+            border-radius: 10px;
+            color: white;
+            margin-right: 5px;
+
+        }
+        .button-message-member:hover{
+            background-color: orangered;
+        }
+
+        .div-comment{
+        margin-top: 20px;
+        }    
+        .comment-container {
+        display: flex;
+        margin-bottom: 16px;
+        }
+        .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 12px;
+        }
+
+        .comment-content {
+        flex: 1;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 8px;
+        }
+
+        .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        }
+
+        .user-name {
+        font-weight: bold;
+        margin-right: 8px;
+        }
+
+        .comment-date {
+        color: #888;
+        }
+        .comment-total{
+            border: none;
+            background-color: white;
+            float: left;
+            margin-left: 5px;
+            color: gray;
+            float: right;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+
+        
+    </style>
+</head>
+<body class="container">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a style="font-size: 20px; font-weight: bold" class="navbar-brand" href="/index">ComicCorner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user">Người dùng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/author">Tác giả</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/comic">Truyện tranh</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Tài khoản
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/">Đổi mật khẩu</a></li>
+                      <li><a class="dropdown-item" href="/index/logout">Đăng xuất</a></li>
+                    </ul>
+                  </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="row">
+    <div class="col-md-4" style="height: 1400px; border-right: 1px solid gray;">
+
+        <div style="background-color: #F8F9FA; border-radius: 10px; width: 410px; padding: 10px;">
+            <h5 style="margin-top: 10px;margin-bottom: 10px;text-align: center;">Thêm truyện tranh</h5>
+        <form action="comic/add-comic" method="post" enctype="multipart/form-data" onsubmit="return validateAndRedirect('add')">
+            <input class="input" id="inputName" name="name" type="text" placeholder="Enter name...">
+            <select class="select" id="author" name="author">
+                <% dataAuthor.forEach((author) => { %>
+                    <option value="<%= author._id %>"><%= author.fullName %></option>
+                <% }); %>
+            </select>
+            <input class="input" id="inputYear"  name="publicationYear" type="text" placeholder="Enter publication year...">
+            <textarea class="inputDescription" id="inputDescription" name="description" placeholder="Enter description..." rows="4"></textarea> 
+            <input type="file" id="choose" name="coverImage" multiple class="custom-file-input"onchange="addImage(this)">
+            <img class="hiddenImageAdd" style="width: 110px;height: 120px; margin-top: 10px;margin-left: 5px;" id="ImageAdd" src="" alt="Current Image">
+            <br>
+            <input id="chooseContentImage" type="file" name="contentImage" multiple onchange="displaySelectedImages(this)" class="custom-file-input" style="color: transparent; background: transparent;">
+            <ul id="imageList"></ul>
+            <!-- <img class="hiddenImageAdd" style="width: 240px;height: 240px; margin-top: 10px" id="ImageAdd" src="" alt="Current Image"> -->
+            
+            <input id="push" type="submit" value="Save" >
+        </form>
+    </div>
+
+    <div style="background-color: #F8F9FA; border-radius: 10px; width: 410px; padding: 10px; margin-top: 20px;">
+        <h5 style="margin-top: 10px;margin-bottom: 10px;text-align: center;">Cập nhật truyện tranh</h5>
+    <form action="comic/update-comic" method="post" enctype="multipart/form-data" onsubmit="return validateAndRedirect('update')">
+        <input class="input" id="inputID" name="_id" type="hidden">
+        <input class="input" id="inputNameUpdate" name="name" type="text" placeholder="Enter name...">
+        <select class="select" id="authorUpdate" name="author">
+            <% dataAuthor.forEach((author) => { %>
+                <option value="<%= author._id %>"><%= author.fullName %></option>
+            <% }); %>
+        </select>
+        <input class="input" id="inputYearUpdate"  name="publicationYear" type="text" placeholder="Enter publication year...">
+        <textarea class="inputDescription" id="inputDescriptionUpdate" name="description" placeholder="Enter description..." rows="4"></textarea> 
+        <input id="choose" type="file" name="coverImage" class="custom-file-input" multiple onchange="updateCurrentImage(this)">
+        <img class="hiddenImage" style="width: 110px;height: 120px; margin-top: 10px;margin-left: 5px;" id="currentImage" src="" alt="Current Image">
+        <br>
+        <input id="chooseContentImage" type="file" name="contentImage" multiple onchange="displaySelectedImagesUpdate(this,'imageListUpdate','input')" class="custom-file-input" style="color: transparent; background: transparent;">
+        <ul id="imageListUpdate"></ul>
+
+        <!-- <img class="hiddenImageAdd" style="width: 240px;height: 240px; margin-top: 10px" id="ImageAdd" src="" alt="Current Image"> -->
+        <input id="push" type="submit" value="Update" >
+    </form>
+</div>
+
+    </div>
+    <div class="col-md-8" style="height: 600px;">
+        <h5 style="margin-top: 10px;margin-bottom: 10px">Danh sách truyện tranh</h5>
+        
+        <% const user = dataUser %>
+        <% const likeComic = dataLikeComic %>
+        <% const authorData = dataAuthor %>
+        <% const commentData = dataComment %>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Cover Image</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>PublicationYear</th>
+                <th>Description</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% var stt = 1%>
+            <% dataComic.forEach((comic) => { %>
+                <tr style="border-bottom: 1px solid #ccc;">
+                    <td><%= stt %></td>
+                    <td>
+                        <img style="width: 50px;height: 80px;" src="<%= comic.coverImage %>">
+                    </td>
+                    <td>
+                        <%= comic.name %>
+                    </td>
+                    <td>
+                        <% // Tìm bookCategory tương ứng với ID
+                        const author = dataAuthor.find(author => author._id.equals(comic.author));
+                    if (author) { %>
+                        TG: <%= author.fullName %>
+                    <% } %>
+                    </td>
+                    <td><%= comic.publicationYear %></td>
+                    <td> <%= comic.description %></td>
+                    <td>
+                        <button id="btn-details" style="margin-left: 5px; margin-top: 5px; width: 95%;" class="btn btn-warning" type="button" onclick="openAlertDialog(
+                            <%= JSON.stringify(comic)%>,
+                            <%= JSON.stringify(authorData)%>,
+                            <%= JSON.stringify(user)%>,
+                            <%= JSON.stringify(likeComic)%>,
+                            <%= JSON.stringify(commentData)%>,
+                            
+                            )">Details</button>
+                    </td>
+                    
+                </tr>
+                <% stt++ %>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<script>
+    function updateCurrentImage(input) {
+        var currentImage = document.getElementById('currentImage');
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                currentImage.src = e.target.result;
+                currentImage.classList.remove('hiddenImage');
+                currentImage.classList.add('visibleImage');
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            currentImage.classList.remove('visibleImage');
+            currentImage.classList.add('hiddenImage');
+        }
+    }
+    function addImage(input) {
+        var ImageAdd = document.getElementById('ImageAdd');
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                ImageAdd.src = e.target.result;
+                ImageAdd.classList.remove('hiddenImageAdd');
+                ImageAdd.classList.add('visibleImageAdd');
+            };
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            ImageAdd.classList.remove('visibleImageAdd');
+            ImageAdd.classList.add('hiddenImageAdd');
+        }
+    }
+    function displaySelectedImages(input) {
+    var imageList = document.getElementById("imageList");
+    imageList.innerHTML = ""; // Xóa nội dung trước đó nếu có
+        for (var i = 0; i < input.files.length; i++) {
+            var file = input.files[i];
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.style.width = "110px";
+            img.style.height = "120px";
+            img.style.marginTop = "10px";
+            img.style.marginLeft = "5px";
+            imageList.appendChild(img);
+        }
+    }
+     function displaySelectedImagesUpdate(images, targetList,status) {
+       
+    var imageListUpdate = document.getElementById(targetList);
+    imageListUpdate.innerHTML = ""; // Xóa nội dung trước đó nếu có
+
+    if(status==="update"){
+        images.forEach((image) => {
+        var img = document.createElement("img");
+        img.src = image;
+        img.style.width = "110px";
+        img.style.height = "120px";
+        img.style.marginTop = "10px";
+        img.style.marginLeft = "5px";
+        imageListUpdate.appendChild(img);
+            });
+        }else{
+        for (var i = 0; i < images.files.length; i++) {
+            var file = images.files[i];
+            var img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.style.width = "110px";
+            img.style.height = "120px";
+            img.style.marginTop = "10px";
+            img.style.marginLeft = "5px";
+            imageListUpdate.appendChild(img);
+        }
+    }
+    }
+    
+
+
+    function openAlertDialog(comic,authorData,dataUser,dataLikeComic,dataComment) {
+        const authorOfComic = authorData.find(author => author._id === comic.author);
+        const alertDialog = document.createElement('div');
+        alertDialog.classList.add('alert-dialog');
+
+        const headWrapper = document.createElement('div');
+        headWrapper.classList.add('head-wrapper');
+
+
+        const textTitleHead = document.createElement('span')
+        textTitleHead.classList.add('text-title-head');
+        textTitleHead.textContent = 'Thông Tin Truyện Tranh';
+
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', closeAlertDialog);
+
+        // Tạo div lớn bao quanh các phần tử
+        const contentWrapper = document.createElement('div');
+        contentWrapper.classList.add('content-wrapper');
+
+        const content = document.createElement('div');
+        content.classList.add('content');
+
+        const contentImageDiv = document.createElement('div');
+        contentImageDiv.classList.add('contentImageDiv');
+
+        const buttons = document.createElement('div');
+        buttons.classList.add('buttons');
+
+        const image = document.createElement('img');
+        image.classList.add('alert-dialog-image');
+        image.src = `${comic.coverImage}`;
+
+        const name = document.createElement('div');
+        name.classList.add('alert-dialog-name');
+        name.textContent = `Sách: ${comic.name}`;
+
+
+        const author = document.createElement('div');
+        author.classList.add('alert-dialog-author');
+        author.textContent = `Tác giả: ${authorOfComic.fullName}`;
+
+
+        const publicationYear = document.createElement('div');
+        publicationYear.classList.add('alert-dialog-publicationYear');
+        publicationYear.textContent = `Năm suất bản : ${comic.publicationYear}`;
+
+        const detailBook = document.createElement('div');
+        detailBook.classList.add('alert-dialog-detailBook');
+        detailBook.textContent = `Thông tin cuốn sách : ${comic.description}`;
+
+        
+
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.addEventListener('click', () => confirmDelete(comic._id));
+
+        const updateButton = document.createElement('button');
+        updateButton.classList.add('button');
+        updateButton.textContent = 'Update';
+        updateButton.addEventListener('click', () =>{
+                loadItemData(comic,authorOfComic);
+                displaySelectedImagesUpdate(comic.contentImage, 'imageListUpdate','update');
+                closeAlertDialog();
+        });
+
+        const duongKeNgang = document.createElement('div');
+        duongKeNgang.classList.add('duongKeNgang');
+
+        const likeAndCommentDiv = document.createElement('div');
+        likeAndCommentDiv.classList.add('likeAndCommentDiv');
+
+
+        const likeComic = dataLikeComic.filter(like => like.comic === comic._id);
+        //const dislikeBook = dataDislikeProduct.filter(dislike => dislike.book === idBook);
+
+        const likeButton = document.createElement('button');
+        likeButton.classList.add('like-button');
+        likeButton.textContent = likeComic.length + ' lượt yêu thích';
+        likeButton.addEventListener('click',() => openDialogMember(likeComic,dataUser,'1',comic.name));
+
+        const commentOfComic = dataComment.filter(com => com.comic === comic._id)
+
+        const commentTotal = document.createElement('button');
+        commentTotal.classList.add('comment-total');
+        commentTotal.textContent = commentOfComic.length + ' bình luận';
+        
+    
+        const textContentImage = document.createElement('div');
+        textContentImage.classList.add('alert-dialog-textContentImage');
+        textContentImage.textContent = `Ảnh nội dung truyện`;
+        contentImageDiv.appendChild(textContentImage)
+        for(var i = 0 ; i < comic.contentImage.length ; i++){
+            const imageContent = document.createElement('img');
+            imageContent.classList.add('alert-dialog-image');
+            imageContent.src = `${comic.contentImage[i]}`;
+            alertDialog.appendChild(imageContent);
+            contentImageDiv.appendChild(imageContent)
+        }
+
+
+        const divComment = document.createElement('div')
+        divComment.classList.add('div-comment');
+
+        commentOfComic.forEach((comment) => {
+        const user = dataUser.find(user => user._id === comment.user);
+
+        const commentContainer = document.createElement('div');
+        commentContainer.classList.add('comment-container');
+
+        const userAvatar = document.createElement('img');
+        userAvatar.src = user.image; // Sử dụng đường dẫn ảnh từ user
+        userAvatar.alt = 'User Avatar';
+        userAvatar.classList.add('user-avatar');
+
+        const commentContent = document.createElement('div');
+        commentContent.classList.add('comment-content');
+
+        const commentHeader = document.createElement('div');
+        commentHeader.classList.add('comment-header');
+
+        const userName = document.createElement('span');
+        userName.classList.add('user-name');
+        userName.textContent = user.fullName;
+
+        const commentDate = document.createElement('span');
+        commentDate.classList.add('comment-date');
+        commentDate.textContent = formatTimeAgo(comment.commentDate);
+
+        const commentText = document.createElement('p');
+        commentText.textContent = comment.content;
+
+        commentHeader.appendChild(userName);
+        commentHeader.appendChild(commentDate);
+
+        commentContent.appendChild(commentHeader);
+        commentContent.appendChild(commentText);
+
+        commentContainer.appendChild(userAvatar);
+        commentContainer.appendChild(commentContent);
+
+        divComment.appendChild(commentContainer);
+        });
+
+        content.appendChild(name);
+        content.appendChild(author);
+        content.appendChild(publicationYear);
+        
+
+        // Thêm các phần tử vào div lớn
+
+        headWrapper.appendChild(closeButton)
+        headWrapper.appendChild(textTitleHead)
+        contentWrapper.appendChild(image);
+        contentWrapper.appendChild(content);
+
+        buttons.appendChild(deleteButton)
+        buttons.appendChild(updateButton)
+        likeAndCommentDiv.appendChild(likeButton)
+        likeAndCommentDiv.appendChild(commentTotal)
+
+        //likeAndCommentDiv.appendChild(dislikeButton)
+        //likeAndCommentDiv.appendChild(commentButton)
+
+        // divInputComment.appendChild(imgLibra)
+        // divInputComment.appendChild(divInput)
+        // divComment.appendChild(divInputComment)
+        // divComment.appendChild(titleTextDivComment)
+        // divComment.appendChild(commentDiv)
+
+
+        // Thêm div lớn vào dialog
+        alertDialog.appendChild(headWrapper);
+        alertDialog.appendChild(contentWrapper);
+        alertDialog.appendChild(detailBook);
+        alertDialog.appendChild(contentImageDiv);
+        
+        
+        alertDialog.appendChild(buttons);
+        alertDialog.appendChild(duongKeNgang);
+        alertDialog.appendChild(likeAndCommentDiv);
+        alertDialog.appendChild(divComment);
+
+
+
+        //alertDialog.appendChild(divComment);
+        document.body.appendChild(alertDialog);
+    }
+
+    function formatDate(dateString) {
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        const formattedDate = new Date(dateString).toLocaleDateString('en-GB', options);
+        return formattedDate;
+    }
+
+    function formatTimeAgo(commentDate) {
+    const currentDate = new Date();
+    const commentDateTime = new Date(commentDate);
+
+    const timeDifference = currentDate - commentDateTime;
+    const secondsDifference = Math.floor(timeDifference / 1000);
+    const minutesDifference = Math.floor(secondsDifference / 60);
+    const hoursDifference = Math.floor(minutesDifference / 60);
+    const daysDifference = Math.floor(hoursDifference / 24);
+
+    if (secondsDifference < 60) {
+        return `${secondsDifference} giây trước`;
+    } else if (minutesDifference < 60) {
+        return `${minutesDifference} phút trước`;
+    } else if (hoursDifference < 24) {
+        return `${hoursDifference} giờ trước`;
+    } else if (daysDifference === 1) {
+        return '1 ngày trước';
+    } else if (daysDifference <= 3) {
+        return `${daysDifference} ngày trước`;
+    } else {
+        // Sử dụng hàm formatDate để định dạng ngày khi đã qua 3 ngày
+        return formatDate(commentDate);
+    }
+}
+
+
+    function openDialogMember(like,members,status,nameBook){
+        const alertDialog = document.createElement('div');
+        alertDialog.classList.add('alert-dialog-member');
+
+        const headWrapper = document.createElement('div');
+        headWrapper.classList.add('head-wrapper');
+
+        var bookNameNew = '';
+        if (nameBook.length > 27) {
+            bookNameNew = nameBook.slice(0, 27) + '...';
+        }else{
+            bookNameNew = nameBook;
+        }
+        const textTitleHead = document.createElement('span')
+        textTitleHead.classList.add('text-title-head-member');
+        if (status === '1'){
+            textTitleHead.textContent = like.length + ' lượt thích ' + '"' + bookNameNew + '"';
+        }
+
+        const closeButton = document.createElement('button');
+        closeButton.classList.add('close-button-member');
+        closeButton.textContent = 'X';
+        closeButton.addEventListener('click', closeAlertDialogMember);
+
+        var content;
+        var itemMember;
+        var member;
+        var imageMember;
+        var nameMember;
+        var buttonMessage;
+
+        if (status === '1'){
+            content = document.createElement('div');
+            content.classList.add('div-content-member');
+            like.forEach((like)=>{
+
+                itemMember = document.createElement('div');
+                itemMember.classList.add('item-div-member');
+
+                member = members.find(mem => mem._id === like.user);
+
+                imageMember = document.createElement('img');
+                imageMember.classList.add('image-item-member');
+                imageMember.src = member.image;
+
+                nameMember = document.createElement('span');
+                nameMember.classList.add('name-item-member');
+                nameMember.textContent = member.fullName;
+
+                
+
+                itemMember.appendChild(imageMember);
+                itemMember.appendChild(nameMember);
+
+                content.appendChild(itemMember);
+            })
+
+        }
+        headWrapper.appendChild(textTitleHead)
+        headWrapper.appendChild(closeButton)
+
+        alertDialog.appendChild(headWrapper)
+        alertDialog.appendChild(content)
+
+
+        document.body.appendChild(alertDialog);
+    }
+    function closeAlertDialogMember() {
+        const alertDialog = document.querySelector('.alert-dialog-member');
+        if (alertDialog) {
+            document.body.removeChild(alertDialog);
+
+        }
+    }
+
+    function loadItemData(comic,author) {
+        console.log(author.fullName)
+        //Lấy các trường input
+        var inputID = document.getElementById('inputID');
+        var inputName = document.getElementById('inputNameUpdate');
+        var authorInput = document.getElementById('authorUpdate');
+        var inputPublicationYear = document.getElementById('inputYearUpdate');
+        var inputDetailBook = document.getElementById('inputDescriptionUpdate');
+        var currentImage = document.getElementById('currentImage');
+        // Gán dữ liệu của member vào các trường input
+        inputName.value = comic.name;
+        inputID.value = comic._id;
+        inputPublicationYear.value = comic.publicationYear;
+        inputDetailBook.value = comic.description;
+        currentImage.src = comic.coverImage;
+
+        if (comic.coverImage) {
+            currentImage.classList.remove('hiddenImage');
+            currentImage.classList.add('visibleImage');
+            currentImage.src = comic.coverImage;
+        } else {
+            currentImage.classList.remove('visibleImage');
+            currentImage.classList.add('hiddenImage');
+        }
+        for (var y = 0; y < authorInput.options.length; y++) {
+            if (authorInput.options[y].value === author._id) {
+                authorInput.options[y].selected = true;
+                break;
+            }
+        }
+    }
+    
+    
+    function closeAlertDialog() {
+        const alertDialog = document.querySelector('.alert-dialog');
+        if (alertDialog) {
+            document.body.removeChild(alertDialog);
+
+        }
+    }
+
+    function confirmDelete(_id) {
+        var result = confirm("Bạn có chắc muốn xóa cuốn truyện này không?");
+        if (result) {
+            window.location.href = "comic/delete-comic/?_id=" + _id;
+        }
+    }
+
+
+    function validateAndRedirect(status) {
+        var name;
+        var price;
+        //var borrowPrice;
+        var publicationYear;
+        var details;
+        var image;
+        if (status==='add'){
+            name = document.getElementById('inputName').value;
+            publicationYear = document.getElementById('inputYear').value;
+            description = document.getElementById('inputDescription').value;
+            imageCover = document.getElementById('choose').files[0];
+            imageContent = document.getElementById('chooseContentImage').files[0];
+
+            if (name.length === 0 || publicationYear.length === 0 ||description.length === 0|| !imageCover || !imageContent) {
+                alert('Vui lòng điền đầy đủ thông tin và chọn ảnh!');
+                return false
+            }
+        }else if (status==='update') {
+            name = document.getElementById('inputNameUpdate').value;
+            publicationYear = document.getElementById('inputYearUpdate').value;
+            description = document.getElementById('inputDescriptionUpdate').value;
+
+            if (name.length === 0 || publicationYear.length === 0 || description.length === 0) {
+                alert('Vui lòng điền đầy đủ thông tin!');
+                return false
+            }
+        }
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+</html>
